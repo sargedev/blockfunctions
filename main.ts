@@ -14,4 +14,10 @@ namespace blockFunctions {
             this.method(this.values);
         }
     }
+
+    let functions: { [key: string]: BlockFunction } = {};
+
+    function createFunction(name: string, args: string[], method: (args: any[]) => any) {
+        functions[name] = new BlockFunction(method, args);
+    }
 }
