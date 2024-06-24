@@ -11,13 +11,20 @@ namespace blockFunctions {
         }
 
         call(values: any[]) {
+            this.values = values;
             this.method(this.values);
+            currentFunction = this;
         }
     }
 
     let functions: { [key: string]: BlockFunction } = {};
+    let currentFunction: BlockFunction;
 
     function createFunction(name: string, args: string[], method: (args: any[]) => any) {
         functions[name] = new BlockFunction(method, args);
+    }
+
+    function getParameter(name: string) {
+        return currentFunction.values[currentFunction.args.indexOf(name)];
     }
 }
